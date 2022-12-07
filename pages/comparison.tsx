@@ -47,8 +47,8 @@ const comparison = () => {
       </Heading>
       <SimpleGrid spacing={2} templateColumns='repeat(auto-fill, minmax(290px, 1fr))'>
       <PlayerCard />
-      <PlayerCard />
-      <PlayerCard />
+      {/* <PlayerCard />
+      <PlayerCard /> */}
       </SimpleGrid>
     </Flex>
   );

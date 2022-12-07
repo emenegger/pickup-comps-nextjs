@@ -20,7 +20,7 @@ async function handler(req, res) {
 
     const result = await nbaStatsCollections.insertOne({ data });
 
-    console.log(result);
+    // console.log(result);
 
     client.close();
 
@@ -34,7 +34,7 @@ async function handler(req, res) {
 
     const result = await nbaStatsCollections.find().toArray();
 
-    console.log('get result', result);
+    // console.log('get result', result);
 
     client.close();
 
