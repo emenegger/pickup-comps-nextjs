@@ -6,12 +6,14 @@ export const playerMatchFunc = (adjustedUserStats: userStatsType, apiData) => {
 
   const bestMatch = {
     simalarityTotal: Infinity,
-    player_id: null,
+    _id: null,
     pts: null,
     ast: null,
     reb: null,
     stl: null,
     blk: null,
+    first_name: null,
+    last_name: null,
   };
 
   for (const playerObj of apiData) {
@@ -20,18 +22,13 @@ export const playerMatchFunc = (adjustedUserStats: userStatsType, apiData) => {
       const diff = (a:number, b: number) => Math.abs(a - b);
       // refactor this!!!
       const simalarityTotal =
-        diff(adjustedUserStats.points, playerObj.data.pts) +
-        diff(adjustedUserStats.assists, playerObj.data.ast) +
-        diff(adjustedUserStats.rebounds, playerObj.data.reb);
+        diff(adjustedUserStats.points, playerObj.pts) +
+        diff(adjustedUserStats.assists, playerObj.ast) +
+        diff(adjustedUserStats.rebounds, playerObj.reb);
       // console.log(playerObj.player_id, simalarityTotal);
       if (simalarityTotal < bestMatch.simalarityTotal) {
         bestMatch.simalarityTotal = simalarityTotal;
-        bestMatch.player_id = playerObj.data.player_id;
-        bestMatch.pts = playerObj.data.pts;
-        bestMatch.ast = playerObj.data.ast;
-        bestMatch.reb = playerObj.data.reb;
-        bestMatch.stl = playerObj.data.stl;
-        bestMatch.blk = playerObj.data.blk;
+        Object.assign(bestMatch, playerObj);
       }
     }
   }

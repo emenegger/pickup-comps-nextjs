@@ -16,9 +16,9 @@ async function handler(req, res) {
       dbName: "nba_stats",
     });
     const db = client.db();
-    const nbaStatsCollections = db.collection("nba_player_stats");
+    const nbaStatsCollections = db.collection("nba_player_bio_stats");
 
-    const result = await nbaStatsCollections.insertOne({ data });
+    const result = await nbaStatsCollections.insert({ data });
 
     // console.log(result);
 

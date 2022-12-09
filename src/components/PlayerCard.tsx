@@ -25,6 +25,7 @@ import TableStats from "./TableStats";
 import TableDetails from "./TableDetails";
 import { useUserStatsContext } from '../context/user-context'
 import { useAdjustedStatsContext } from "../context/adjusted-stats-context";
+import { useNbaCompContext } from "../context/nba-comp-context";
 
 
 const playerDetails = {
@@ -45,6 +46,7 @@ const PlayerCard = () => {
 
   const [userStatsObj, setUserStatsObj] = useUserStatsContext();
   const [adjustedStats, setAdjustedStats] = useAdjustedStatsContext();
+  const [nbaComp, setNbaComp] = useNbaCompContext();
 
   return (
     <Card>
@@ -57,17 +59,17 @@ const PlayerCard = () => {
       </CardHeader>
       <CardBody>
         <Image
-          src="https://cdn.nba.com/headshots/nba/latest/1040x760/1630162.png"
+          src={nbaComp.imgSrc}
           // src='public/jamesharden.png'
           alt="player name"
           borderRadius="lg"
         />
         <Stack mt="6" spacing="3">
           <Heading size="md" textAlign="center">
-            {playerDetails.full_name}
+            {nbaComp.first_name} {nbaComp.last_name}
           </Heading>
         </Stack>
-        <TableDetails playerDetails={playerDetails} />
+        <TableDetails playerDetails={nbaComp} />
         <Divider />
         <Stack spacing={5} m={4}>
           <Heading size="sm" textAlign="center">
@@ -82,7 +84,7 @@ const PlayerCard = () => {
         </Stack>
       </CardBody>
       <Divider />
-      <TableStats />
+      <TableStats playerDetails={nbaComp} />
       {/* <BarChartContainer /> */}
       <CardFooter>
         <Button flex="1" variant="ghost" leftIcon={<BiLike />}>

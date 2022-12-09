@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 const TableDetails = (props: any) => {
+
   const {playerDetails} = props;
   return (
     <TableContainer>
@@ -17,16 +18,16 @@ const TableDetails = (props: any) => {
           <Tr>
             <Th>Position</Th>
             <Th>Team</Th>
-            <Th>Age</Th>
             <Th>Height</Th>
+            <Th>Weight</Th>
           </Tr>
         </Thead>
         <Tbody>
           <Tr>
             <Td>{playerDetails.position}</Td>
-            <Td>{playerDetails.team}</Td>
-            <Td>{playerDetails.age}</Td>
+            <Td>{playerDetails.team.full_name}</Td>
             <Td>{playerDetails.height_feet}' {playerDetails.height_inches}"</Td>
+            <Td>{playerDetails.weight_pounds}</Td>
           </Tr>
         </Tbody>
       </Table>

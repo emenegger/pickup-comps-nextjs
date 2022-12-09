@@ -8,42 +8,55 @@ const MONGODB_DB = "nba_stats";
 
 async function handler(req, res) {
   console.log("reached handler!");
-  if (req.method === "PATCH") {
-    console.log("in patch method <--------------------------------------");
-    const { player_id, player_bio } = req.body;
-    console.log('player_id', player_id,'player_bio', player_bio);
-
+  if (req.method === "GET") {
+    console.log("in get method <--------------------------------------");
     const client = await MongoClient.connect(MONGODB_URI);
     const db = client.db();
-    const nbaStatsCollections = db.collection("nba_player_stats");
+    const nbaStatsCollections = db.collection("nba_player_bio_stats");
 
-    const filter = { "data.player_id": player_id };
-    const updateDoc = { $set: {
-      player_bio: player_bio,
-    }}
-    const result = await nbaStatsCollections.updateOne(filter, updateDoc);
+    const result = await nbaStatsCollections.find().toArray();
 
-    console.log('patch result', result);
+    // console.log('get result', result);
 
     client.close();
 
     res.status(201).json(result);
   }
-  if (req.method === "POST") {
-    console.log("in post method <--------------------------------------");
-    const { playerData } = req.body;
+  // if (req.method === "PATCH") {
+  //   console.log("in patch method <--------------------------------------");
+  //   const { player_id, player_bio } = req.body;
+  //   console.log('player_id', player_id,'player_bio', player_bio);
 
-    const client = await MongoClient.connect(MONGODB_URI);
-    const db = client.db();
-    const nbaStatsCollections = db.collection("nba_player_bio_stats");
+  //   const client = await MongoClient.connect(MONGODB_URI);
+  //   const db = client.db();
+  //   const nbaStatsCollections = db.collection("nba_player_stats");
 
-    const result = await nbaStatsCollections.insertMany(playerData);
+  //   const filter = { "data.player_id": player_id };
+  //   const updateDoc = { $set: {
+  //     player_bio: player_bio,
+  //   }}
+  //   const result = await nbaStatsCollections.updateOne(filter, updateDoc);
 
-    client.close();
+  //   console.log('patch result', result);
 
-    res.status(201).json({ message: "successful insertion" });
+  //   client.close();
 
-  }
+  //   res.status(201).json(result);
+  // }
+  // if (req.method === "POST") {
+  //   console.log("in post method <--------------------------------------");
+  //   const { playerData } = req.body;
+
+  //   const client = await MongoClient.connect(MONGODB_URI);
+  //   const db = client.db();
+  //   const nbaStatsCollections = db.collection("nba_player_bio_stats");
+
+  //   const result = await nbaStatsCollections.insertMany(playerData);
+
+  //   client.close();
+
+  //   res.status(201).json({ message: "successful insertion" });
+  // }
 }
 
 export default handler;

@@ -1,5 +1,5 @@
 import React, { useContext, useState, createContext } from "react";
-import { createNonNullExpression } from "typescript";
+import { userStatsType } from "../global/types";
 
 const UserStatsContext = createContext([]);
 
