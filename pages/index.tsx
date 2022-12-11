@@ -1,5 +1,5 @@
-import Head from "next/head";
-import Image from "next/image";
+// import Head from "next/head";
+// import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import {
   Flex,
@@ -13,6 +13,8 @@ import FormMain from "../src/components/FormMain";
 import { MongoClient } from "mongodb";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { withPageAuthRequired, useUser } from '@auth0/nextjs-auth0/client';
+
 
 const MONGODB_URI =
   "mongodb+srv://evanemenegger:KmQ9zBIaMfNKq8O0@cluster0.d1andp0.mongodb.net/nba_stats?retryWrites=true&w=majority";
@@ -39,6 +41,10 @@ const MONGODB_URI =
 // };
 
 export default function Home() {
+
+  const { user, error, isLoading } = useUser();
+  console.log( user, isLoading)
+
   const formItems = [
     ["game_to", "pts"],
     ["points", "pts"],
@@ -79,3 +85,5 @@ export default function Home() {
     </Flex>
   );
 }
+
+export const getServerSideProps = withPageAuthRequired();
