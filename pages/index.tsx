@@ -45,7 +45,7 @@ const MONGODB_URI =
 export default function Home() {
 
   const { user, error, isLoading } = useUser();
-  console.log( user, isLoading)
+  console.log( user, isLoading )
 
   const formItems = [
     ["game_to", "pts"],
