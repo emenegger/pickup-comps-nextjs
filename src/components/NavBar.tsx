@@ -5,6 +5,14 @@ import {
   TabPanels,
   TabPanel,
   Icon,
+  Avatar,
+  WrapItem,
+  Wrap,
+  Flex,
+  Box,
+  Heading,
+  ButtonGroup,
+  Spacer,
 } from "@chakra-ui/react";
 import * as React from "react";
 import { FiMenu, FiBarChart } from "react-icons/fi";
@@ -20,7 +28,7 @@ import { withPageAuthRequired, useUser } from "@auth0/nextjs-auth0/client";
 const NavBar = () => {
   const { user, error, isLoading } = useUser();
   return (
-    <Tabs>
+    <Tabs >
       <TabList justifyContent="space-between" alignItems="flex-end">
         <Link href="/">
           {" "}
@@ -33,9 +41,14 @@ const NavBar = () => {
           <Tab>Your Comps</Tab>
         </Link>
         {user ? (
-          <Link href="/api/auth/logout">
-            <Tab>Logout</Tab>
-          </Link>
+          <>
+            <Link href="/api/auth/logout">
+              <Tab>Logout</Tab>
+            </Link>
+            {/* <WrapItem>
+              <Avatar name={user.name} size="sm" src={user.picture}/>
+            </WrapItem> */}
+          </>
         ) : (
           <Link href="/api/auth/login">
             <Tab>Login</Tab>
@@ -47,4 +60,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-

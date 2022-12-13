@@ -10,9 +10,9 @@ import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  return (
-        <UserProvider>
-    <ChakraProvider>
+ return (
+    <UserProvider>
+      <ChakraProvider>
         <UserStatsProvider>
           <AdjustedStatsProvider>
             <NbaCompProvider>

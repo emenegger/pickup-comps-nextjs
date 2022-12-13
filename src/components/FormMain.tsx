@@ -113,11 +113,11 @@ const FormMain = (props: any) => {
   return (
     <form onSubmit={submitHandler}>
       {inputs}
+        {/* <Link href="/comparison"> */}
       <Button type="submit" colorScheme="teal" onSubmit={submitHandler}>
-        {/* <Link href="/comparison" onSubmit={submitHandler}> */}
         Submit Stats
-        {/* </Link> */}
       </Button>
+        {/* </Link> */}
       {/* <Link href="/comparison" passHref legacyBehavior>
         <LinkButton />
       </Link> */}
