@@ -28,16 +28,6 @@ import { useAdjustedStatsContext } from "../context/adjusted-stats-context";
 import { useNbaCompContext } from "../context/nba-comp-context";
 
 
-const playerDetails = {
-  first_name: "Anthony",
-  last_name: "Edwards",
-  full_name: "Anthony Edwards",
-  position: "G",
-  height_feet: 6,
-  height_inches: 6,
-  team: "Timberwolves",
-  age: 21,
-};
 
 
 const PlayerCard = () => {
@@ -60,7 +50,6 @@ const PlayerCard = () => {
       <CardBody>
         <Image
           src={nbaComp.imgSrc}
-          // src='public/jamesharden.png'
           alt="player name"
           borderRadius="lg"
         />
@@ -78,7 +67,7 @@ const PlayerCard = () => {
           <Progress
             colorScheme="green"
             height="32px"
-            value={now}
+            value={100 - nbaComp.simalarityTotal * 2}
             display="true"
           />
         </Stack>
