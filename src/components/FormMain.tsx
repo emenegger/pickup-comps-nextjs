@@ -4,18 +4,20 @@ import {
   InputRightAddon,
   Input,
   Button,
+  CircularProgress
 } from "@chakra-ui/react";
-import React, { useRef, useState, useContext, useEffect } from "react";
+import React, { useRef, useState, useContext, useEffect, Suspense } from "react";
 import { useUserStatsContext } from "../context/user-context";
 import Link from "next/link";
 import { useAdjustedStatsContext } from "../context/adjusted-stats-context";
 import { userStatsType } from "../global/types";
-import axios from "axios";
-import { MongoClient } from "mongodb";
+// import axios from "axios";
+// import { MongoClient } from "mongodb";
 import { playerMatchFunc } from "../functions/playerMatch";
 import { useNbaCompContext } from "../context/nba-comp-context";
 import { adjustUserStats } from "../functions/adjustUserStats";
 import nbaNetData from "../store/nba-net-data.json";
+import { useRouter } from "next/router";
 
 const MONGODB_URI =
   "mongodb+srv://evanemenegger:UXae5uEMtelJoptR@cluster0.d1andp0.mongodb.net/nba_stats?retryWrites=true&w=majority";
@@ -29,8 +31,11 @@ const FormMain = (props: any) => {
 
   const inputBackground = useColorModeValue("white.300", "gray.800");
   const { formItems } = props;
+  
+  const router = useRouter();
 
   const leagueAverageTeamPoints = 110.6;
+  let loading = false;
 
   // adding player averages data from the ball don't lie api to the database
   // const addPlayerData = async () => {
@@ -70,7 +75,7 @@ const FormMain = (props: any) => {
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    // addImgs();
+    loading = true;
     // sets the new adjusted stats based on the user input
     setAdjustedStats(
       adjustUserStats(userStatsObj, leagueAverageTeamPoints, adjustedStats)
@@ -78,12 +83,13 @@ const FormMain = (props: any) => {
     console.log("userStatsObj", userStatsObj);
     const jsonData = await fetch("/api/nba-players");
     const data = await jsonData.json();
-    // console.log('data', data)
 
     // playerMatch = playerMatchFunc(adjustedStats, data);
     setNbaComp(playerMatchFunc(adjustedStats, data));
 
     console.log("nbaComp", nbaComp);
+    loading = false
+    router.push("/comparison");
   };
 
   const handleUserInput = (e: React.FormEvent) => {
@@ -111,17 +117,14 @@ const FormMain = (props: any) => {
   });
 
   return (
+    <Suspense fallback={<CircularProgress isIndeterminate color='green.300' />}>
     <form onSubmit={submitHandler}>
       {inputs}
-        {/* <Link href="/comparison"> */}
       <Button type="submit" colorScheme="teal" onSubmit={submitHandler}>
         Submit Stats
       </Button>
-        {/* </Link> */}
-      {/* <Link href="/comparison" passHref legacyBehavior>
-        <LinkButton />
-      </Link> */}
     </form>
+    </Suspense>
   );
 };
 

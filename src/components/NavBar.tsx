@@ -46,8 +46,9 @@ const NavBar = () => {
               <Tab>Logout</Tab>
             </Link>
             {/* <WrapItem>
-              <Avatar name={user.name} size="sm" src={user.picture}/>
+              <Avatar name={user?.name} size="sm" src={user?.picture}/>
             </WrapItem> */}
+            {/* this works but formatting needs to change */}
           </>
         ) : (
           <Link href="/api/auth/login">
