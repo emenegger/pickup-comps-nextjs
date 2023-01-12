@@ -6,22 +6,30 @@ import { UserStatsProvider } from "../src/context/user-context";
 import { useState, Provider } from "react";
 import { AdjustedStatsProvider } from "../src/context/adjusted-stats-context";
 import { NbaCompProvider } from "../src/context/nba-comp-context";
-import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
+// import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [supabase] = useState(() => createBrowserSupabaseClient());
 
- return (
-    <UserProvider>
-      <ChakraProvider>
-        <UserStatsProvider>
-          <AdjustedStatsProvider>
-            <NbaCompProvider>
-              <NavBar />
-              <Component {...pageProps} />
-            </NbaCompProvider>
-          </AdjustedStatsProvider>
-        </UserStatsProvider>
-      </ChakraProvider>
-    </UserProvider>
+  return (
+    <SessionContextProvider
+      supabaseClient={supabase}
+      initialSession={pageProps.initialSession}
+    >
+      {/* <UserProvider> */}
+        <ChakraProvider>
+          <UserStatsProvider>
+            <AdjustedStatsProvider>
+              <NbaCompProvider>
+                <NavBar />
+                <Component {...pageProps} />
+              </NbaCompProvider>
+            </AdjustedStatsProvider>
+          </UserStatsProvider>
+        </ChakraProvider>
+      {/* </UserProvider> */}
+    </SessionContextProvider>
   );
 }
