@@ -4,14 +4,15 @@ import {
   InputRightAddon,
   Input,
   Button,
+  CircularProgress
 } from "@chakra-ui/react";
-import React, { useRef, useState, useContext, useEffect } from "react";
+import React, { useRef, useState, useContext, useEffect, Suspense } from "react";
 import { useUserStatsContext } from "../context/user-context";
 import Link from "next/link";
 import { useAdjustedStatsContext } from "../context/adjusted-stats-context";
 import { userStatsType } from "../global/types";
-import axios from "axios";
-import { MongoClient } from "mongodb";
+// import axios from "axios";
+// import { MongoClient } from "mongodb";
 import { playerMatchFunc } from "../functions/playerMatch";
 import { useNbaCompContext } from "../context/nba-comp-context";
 import { adjustUserStats } from "../functions/adjustUserStats";
@@ -116,12 +117,14 @@ const FormMain = (props: any) => {
   });
 
   return (
+    <Suspense fallback={<CircularProgress isIndeterminate color='green.300' />}>
     <form onSubmit={submitHandler}>
       {inputs}
       <Button type="submit" colorScheme="teal" onSubmit={submitHandler}>
         Submit Stats
       </Button>
     </form>
+    </Suspense>
   );
 };
 

@@ -1,24 +1,12 @@
 import React from "react";
+import { Suspense } from "react";
 import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-  Divider,
   Heading,
-  Box,
   Flex,
   SimpleGrid,
 } from "@chakra-ui/react";
 import BarChartContainer from "../src/components/BarChart";
 import PlayerCard from "../src/components/PlayerCard";
-import { retrievedData } from "../src/store/retrieved-data";
-// import { useRef, useState, useContext } from "react";
 
 
 // export const getStaticProps = async () => {
@@ -38,8 +26,6 @@ import { retrievedData } from "../src/store/retrieved-data";
 
 const comparison = () => {
 
-
-  const now = 90;
   return (
     <Flex flexDirection="column" justifyContent="center" alignItems="center">
       <Heading textAlign="center" size="xl">
@@ -47,8 +33,6 @@ const comparison = () => {
       </Heading>
       <SimpleGrid spacing={2} templateColumns='repeat(auto-fill, minmax(290px, 1fr))'>
       <PlayerCard />
-      {/* <PlayerCard />
-      <PlayerCard /> */}
       </SimpleGrid>
     </Flex>
   );
