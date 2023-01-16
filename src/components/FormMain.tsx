@@ -16,7 +16,6 @@ import { userStatsType } from "../global/types";
 import { playerMatchFunc } from "../functions/playerMatch";
 import { useNbaCompContext } from "../context/nba-comp-context";
 import { adjustUserStats } from "../functions/adjustUserStats";
-import nbaNetData from "../store/nba-net-data.json";
 import { useRouter } from "next/router";
 
 const MONGODB_URI =
@@ -35,7 +34,7 @@ const FormMain = (props: any) => {
   const router = useRouter();
 
   const leagueAverageTeamPoints = 110.6;
-  let loading = false;
+  // let loading = false;
 
   // adding player averages data from the ball don't lie api to the database
   // const addPlayerData = async () => {
@@ -59,7 +58,6 @@ const FormMain = (props: any) => {
   // };
 
   // add images to each player
-
   // const addImgs = async () => {
   //   const allPlayerData = nbaNetData.league.standard;
   //   // allPlayerData.forEach(player => {
@@ -75,7 +73,7 @@ const FormMain = (props: any) => {
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    loading = true;
+    // loading = true;
     // sets the new adjusted stats based on the user input
     setAdjustedStats(
       adjustUserStats(userStatsObj, leagueAverageTeamPoints, adjustedStats)
@@ -88,7 +86,7 @@ const FormMain = (props: any) => {
     setNbaComp(playerMatchFunc(adjustedStats, data));
 
     console.log("nbaComp", nbaComp);
-    loading = false
+    // loading = false;
     router.push("/comparison");
   };
 
