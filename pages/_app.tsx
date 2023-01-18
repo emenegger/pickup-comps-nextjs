@@ -5,6 +5,7 @@ import { UserStatsProvider } from "../src/context/user-context";
 import { useState, useEffect, Provider } from "react";
 import { AdjustedStatsProvider } from "../src/context/adjusted-stats-context";
 import { NbaCompProvider } from "../src/context/nba-comp-context";
+import { LoadingProvider } from "../src/context/loading-context";
 // import { UserProvider, useUser } from "@auth0/nextjs-auth0/client";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
@@ -38,7 +39,6 @@ import { SessionContextProvider } from "@supabase/auth-helpers-react";
 //   )
 // }
 
-
 export default function App({ Component, pageProps }: AppProps) {
   const [supabase] = useState(() => createBrowserSupabaseClient());
 
@@ -47,7 +47,8 @@ export default function App({ Component, pageProps }: AppProps) {
       supabaseClient={supabase}
       initialSession={pageProps.initialSession}
     >
-      {/* <UserProvider> */}
+      <LoadingProvider>
+        {/* <UserProvider> */}
         <ChakraProvider>
           <UserStatsProvider>
             <AdjustedStatsProvider>
@@ -58,6 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
             </AdjustedStatsProvider>
           </UserStatsProvider>
         </ChakraProvider>
+      </LoadingProvider>
       {/* </UserProvider> */}
     </SessionContextProvider>
   );

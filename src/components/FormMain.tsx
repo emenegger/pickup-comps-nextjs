@@ -73,12 +73,13 @@ const FormMain = (props: any) => {
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    // loading = true;
+    
+    router.push("/comparison");
     // sets the new adjusted stats based on the user input
     setAdjustedStats(
       adjustUserStats(userStatsObj, leagueAverageTeamPoints, adjustedStats)
     );
-    console.log("userStatsObj", userStatsObj);
+    
     const jsonData = await fetch("/api/nba-players");
     const data = await jsonData.json();
 
@@ -86,8 +87,7 @@ const FormMain = (props: any) => {
     setNbaComp(playerMatchFunc(adjustedStats, data));
 
     console.log("nbaComp", nbaComp);
-    // loading = false;
-    router.push("/comparison");
+    
   };
 
   const handleUserInput = (e: React.FormEvent) => {
