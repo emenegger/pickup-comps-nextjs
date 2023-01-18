@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/nba-players.js", "src/context/nba-comp-context.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/nba-players.js", "src/context/nba-comp-context.js", "src/context/loading-context.jsx"],
   "exclude": ["node_modules"]
 }

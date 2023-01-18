@@ -37,8 +37,7 @@ const PlayerCard = () => {
   const [nbaComp, setNbaComp] = useNbaCompContext();
 
   return (
-    <Suspense fallback={<CircularProgress isIndeterminate color="green.300" />}>
-      <Card>
+      <Card maxW='md'>
         <CardHeader>
           <Flex>
             <Text size="xs" as="i">
@@ -83,7 +82,6 @@ const PlayerCard = () => {
           </Button>
         </CardFooter>
       </Card>
-    </Suspense>
   );
 };
 
