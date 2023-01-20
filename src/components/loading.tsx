@@ -16,7 +16,7 @@ const Loading = () => {
         thickness="5px"
         valueText="VALUE TEXT"
       >
-        <CircularProgressLabel fontSize='lg' >calculating...</CircularProgressLabel>
+        <CircularProgressLabel fontSize='md' >calculating...</CircularProgressLabel>
       </CircularProgress>
     </Center>
   );

@@ -53,8 +53,8 @@ const comparison = () => {
     return (
       <Flex flexDirection="column" justifyContent="center" alignItems="center">
         <ScaleFade initialScale={0.9} in={isOpen}>
-          <Heading textAlign="center" size="xl">
-            Your NBA Doppelgangers
+          <Heading textAlign="center" size="lg">
+            Your stats are most similar to:
           </Heading>
           <PlayerCard />
         </ScaleFade>
